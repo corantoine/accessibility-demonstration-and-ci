@@ -6,6 +6,7 @@ jobs:
   eslint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: eslint
+        uses: actions/checkout@v4
         run: npm run lint
-        
+
