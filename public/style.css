@@ -1,11 +1,12 @@
 .btn {
-    background: blue;
-    color: white;
-    padding: 10px;
-    cursor: pointer;
+  background: blue;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
 }
 
+/* Contraste : 2.32 pour une cible à 4.5 */
 #contact {
-    color: #aaa;
-    background: #fff;
+  color: #767676;
+  background: #fff;
 }
