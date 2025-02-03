@@ -11,5 +11,75 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.21.2"
+  },
+  Pour intégrer la CI sur le projet que je vous ai donné vous pouvez vous appuyer sur ce qui suit :
+
+### **1. Structure du Projet**
+```
+your-project/
+├── public/
+│   ├── index.html (avec problèmes d'accessibilité)
+├── index.js
+├── package.json
+├── .github/workflows/pa11y.yml
+└── pa11y-ci.json
+```
+
+---
+
+### **2. Fichier GitHub Actions** (`.github/workflows/pa11y.yml`)
+```yaml
+name: Accessibility Check
+
+on: [pull_request]
+
+jobs:
+  check-accessibility:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Start Node server
+        run: |
+          npm install
+          node server.js &
+          sleep 5 # Attendre que le serveur démarre
+
+      - name: Install Pa11y
+        run: npm install -g pa11y-ci
+
+      - name: Run accessibility tests
+        run: pa11y-ci --config pa11y-ci.json
+```
+
+---
+
+### **3. Configuration Minimaliste** (`pa11y-ci.json`)
+```json
+{
+  "urls": ["http://localhost:3000"],
+  "standard": "WCAG2AA",
+  "threshold": 3
+}
+```
+
+---
+
+### **4. Exemple de `package.json`**
+```json
+{
+  "name": "simple-accessibility-check",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "pa11y-ci": "^3.0.1"
   }
+}
+  
 }
