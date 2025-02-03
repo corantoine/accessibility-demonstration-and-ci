@@ -8,5 +8,5 @@ jobs:
     steps:
       - name: eslint
         uses: actions/checkout@v4
+      - name: eslint run
         run: npm run lint
-
