@@ -5,6 +5,7 @@ on: [push]
 jobs:
   eslint:
     runs-on: ubuntu-latest
+    concurrency: lint-group
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
